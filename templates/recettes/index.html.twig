@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recettes index{% endblock %}
+
+{% block body %}
+    <h1>Recettes index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Texte</th>
+                <th>Duree_totale</th>
+                <th>Nombre_de_personne</th>
+                <th>Photo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for recette in recettes %}
+            <tr>
+                <td>{{ recette.id }}</td>
+                <td>{{ recette.nom }}</td>
+                <td>{{ recette.texte }}</td>
+                <td>{{ recette.dureeTotale }}</td>
+                <td>{{ recette.nombreDePersonne }}</td>
+                <td><img 
+                    src="/images/recette/{{recette.photo}}" 
+                    alt="{{ recette.nom }}" 
+                    style="width: 100px; height: 100px;" 
+                ></td>
+                <td>
+                    <a href="{{ path('app_recettes_show', {'id': recette.id}) }}">show</a>
+                    <a href="{{ path('app_recettes_edit', {'id': recette.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_recettes_new') }}">Create new</a>
+{% endblock %}
